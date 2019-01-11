@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="table">
+    <table mat-table [dataSource]="portfolio">
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!--Price Column -->
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> ${{element.price}} </td>
+      </ng-container>
+
+      <!-- quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let element">
+          {{element.quantety}}
+        </td>
+      </ng-container>
+      <!-- quantity Column -->
+      <ng-container matColumnDef="quantity_sell">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field>
+            <input matInput type="number" [(ngModel)]="element.quantety_sell">
+          </mat-form-field>
+        </td>
+      </ng-container>
+      <!-- buy Column -->
+      <ng-container matColumnDef="sell">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"> <button mat-button (click)="sell(element)"><i class="material-icons">clear</i></button> </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator [length]="portfolio.data.length" [pageSize]="25" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+</div>
+
+
