@@ -3,8 +3,11 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.2.
 
 ## Json server
+If don`t have json-server then install it:
+npm install -g json-server
 
-Run json-server --watch stock.json
+Next Run: 
+json-server --watch stock.json
 
 ## Development server
 
