@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 If don`t have json-server then install it:
 npm install -g json-server
 
-Next Run: 
+Next get stock.json file from assets/mockups folder and Run it: 
 json-server --watch stock.json
 
 ## Development server

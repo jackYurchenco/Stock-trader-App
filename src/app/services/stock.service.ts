@@ -43,8 +43,8 @@ export class StockService {
 
   constructor(private httpService : HttpService) { }
 
-  getStock(){
-    return this.httpService.get()
+  getMarkets(){
+    return this.httpService.get('markets')
   }
 
 

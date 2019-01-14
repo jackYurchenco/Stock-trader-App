@@ -14,8 +14,11 @@ export class HttpService {
     this.host = environment.host;
   }
 
-  public get(){
-    return this.http.get(this.host);
+  public get(url: string){
+    return this.http.get(this.host + url);
+  }
+  public set(url: string, data: any){
+    return this.http.post(this.host + url, data);
   }
 
 

@@ -26,12 +26,14 @@ export class MarketsComponent implements OnInit, OnDestroy {
               private portfolioService  : PortfolioService,
               private balanceService    : BalanceService) {
     this.stock = new MatTableDataSource([]);
-    this.portfolioService.portfolio.subscribe(portfolio => this.portfolio = portfolio);
+    this.portfolioService.portfolio.subscribe(portfolio => {
+      this.portfolio = portfolio;
+    });
   }
 
   ngOnInit() {
     /*get stock*/
-    this.subscriptions.add(this.stockService.getStock()
+    this.subscriptions.add(this.stockService.getMarkets()
       .pipe(map(data => data.json()))
       .subscribe(response =>{
         this.stock.data = response;
@@ -57,7 +59,6 @@ export class MarketsComponent implements OnInit, OnDestroy {
     this.stock.filter = category;
   }
 
-
   buy(element: IStock){
     if(element.quantety){
       /*make balance*/
@@ -67,6 +68,7 @@ export class MarketsComponent implements OnInit, OnDestroy {
 
         /*set balance in global variable*/
         this.balanceService.changeBalance(this.balance);
+        this.subscriptions.add(this.balanceService.setBalance(this.balance).subscribe(response=>response));
 
         /*if portfolio have item make sum quantety else make push current item*/
         let st = new Stock(element);
@@ -88,9 +90,9 @@ export class MarketsComponent implements OnInit, OnDestroy {
 
         /*set portfolio in global variable*/
         this.portfolioService.changePortfolio(this.portfolio);
+        this.subscriptions.add(this.portfolioService.setPortfolio(this.portfolio).subscribe(response=>response));
       }
     }
   }
-
 
 }

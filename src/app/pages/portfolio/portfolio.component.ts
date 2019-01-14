@@ -2,8 +2,8 @@ import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatPaginator} from "@angular/material";
 import {PortfolioService} from "../../services/portfolio.service";
 import {from, Subscription} from "rxjs";
-import {findIndex} from "rxjs/internal/operators";
-import {IStock} from "../../services/stock.service";
+import {findIndex, map} from "rxjs/internal/operators";
+import {IStock, Stock} from "../../services/stock.service";
 import {BalanceService} from "../../services/balance.service";
 
 @Component({
@@ -46,13 +46,18 @@ export class PortfolioComponent implements OnInit, OnDestroy {
             this.balanceService.currentBalance.subscribe(balance => this.balance = balance).unsubscribe();
             this.balance += element.quantety_sell * Number(this.portfolio.data[index].price);
             this.balanceService.changeBalance(this.balance);
+            this.subscriptions.add(this.balanceService.setBalance(this.balance).subscribe(response=>response));
           }
           /*remove quantety from list if == 0 and update portfolio in global variable*/
-          if(!this.portfolio.data[index].quantety)
+          if(!this.portfolio.data[index].quantety){
             this.portfolio.data.splice(index, 1);
+          }
+
           this.portfolioService.changePortfolio(this.portfolio.data);
+          this.subscriptions.add(this.portfolioService.setPortfolio(this.portfolio.data).subscribe(response=>response));
         })
         .unsubscribe();
     }
   }
+
 }
