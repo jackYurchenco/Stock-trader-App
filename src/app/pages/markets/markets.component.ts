@@ -42,6 +42,7 @@ export class MarketsComponent implements OnInit, OnDestroy {
         this.getCategories(this.stock.data)
       }));
   }
+
   ngOnDestroy(){
     this.subscriptions.unsubscribe();
   }
