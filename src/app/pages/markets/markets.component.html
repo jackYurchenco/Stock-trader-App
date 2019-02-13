@@ -1,4 +1,32 @@
 <div class="container">
+  <p-treeTable [value]="files" #table>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>Type</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData">
+      <tr>
+        <td>
+          <!--<button (click)="toggle(rowNode.node)">toogle</button>-->
+          <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+          {{rowData.name}}
+          <button (click)="toggle(rowNode); expandChildren(rowNode.node, true)" *ngIf="!rowNode.node.expanded && rowNode.node.children">true</button>
+          <button (click)="toggle(rowNode); expandChildren(rowNode.node, false)" *ngIf="rowNode.node.expanded && rowNode.node.children">false</button>
+          <button (click)="add(rowNode.node)">add</button>
+          <button (click)="deleteNode(rowNode.node)">remove</button>
+        </td>
+        <td>{{rowData.size}}</td>
+        <td>{{rowData.type}}</td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
+
+
+
+
   <div class="filter">
     <mat-form-field>
       <mat-select placeholder="Categories" (selectionChange)="changeCategoy($event.value)">

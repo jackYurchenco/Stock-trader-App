@@ -4,6 +4,8 @@ import {MarketsComponent} from "./markets.component";
 import {MarketsRoutingModule} from "./markets-routing.module";
 import {MatTableModule, MatButtonModule, MatInputModule, MatSelectModule, MatPaginatorModule} from "@angular/material";
 import {FormsModule} from "@angular/forms";
+import {TreeTableModule} from "primeng/components/treetable/treetable";
+
 
 
 
@@ -17,7 +19,9 @@ import {FormsModule} from "@angular/forms";
     MatInputModule,
     MatSelectModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    TreeTableModule
+
 
   ],
   declarations: [
